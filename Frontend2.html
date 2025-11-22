@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Potato Disease Detection | AI-Powered Agriculture Solution</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .hero-bg {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('http://static.photos/agriculture/1200x630/42');
+            background-size: cover;
+            background-position: center;
+        }
+        .disease-card {
+            transition: all 0.3s ease;
+        }
+        .disease-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .upload-area {
+            border: 2px dashed #4CAF50;
+            transition: all 0.3s ease;
+        }
+        .upload-area:hover {
+            background-color: rgba(76, 175, 80, 0.1);
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white shadow-md z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i data-feather="cpu" class="text-green-600"></i>
+                        <span class="ml-2 font-bold text-xl text-green-800">PotatoAI</span>
+                    </div>
+                </div>
+                <div class="hidden md:ml-6 md:flex md:items-center md:space-x-8">
+                    <a href="#home" class="text-green-800 hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium transition duration-300">Home</a>
+                    <a href="#about" class="text-green-800 hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium transition duration-300">About</a>
+                    <a href="#diseases" class="text-green-800 hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium transition duration-300">Diseases</a>
+                    <a href="#detection" class="text-green-800 hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium transition duration-300">Detection</a>
+                    <a href="#faq" class="text-green-800 hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium transition duration-300">FAQ</a>
+                    <a href="#contact" class="text-green-800 hover:text-green-600 px-3 py-2 rounded-md text-sm font-medium transition duration-300">Contact</a>
+                </div>
+                <div class="-mr-2 flex items-center md:hidden">
+                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-green-800 hover:text-green-600 focus:outline-none transition duration-300" aria-controls="mobile-menu" aria-expanded="false">
+                        <i data-feather="menu"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg min-h-screen flex items-center justify-center text-white pt-16" data-aos="fade">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6" data-aos="fade-up">AI-Powered Potato Disease Detection</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">Upload a potato leaf image and instantly know if it's healthy or diseased with our advanced machine learning model.</p>
+            <a href="#detection" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 transition duration-300 transform hover:scale-105" data-aos="fade-up" data-aos-delay="200">
+                Try It Now
+                <i data-feather="arrow-right" class="ml-2"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl" data-aos="fade-up">
+                    About Our Project
+                </h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto" data-aos="fade-up" data-aos-delay="100">
+                    Harnessing the power of artificial intelligence to protect potato crops worldwide.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div data-aos="fade-right">
+                    <h3 class="text-2xl font-bold text-green-800 mb-4">How It Works</h3>
+                    <p class="text-gray-600 mb-6">
+                        Our deep learning model analyzes potato leaf images to detect diseases with high accuracy. 
+                        Trained on thousands of images, it can identify common potato diseases like Early Blight, 
+                        Late Blight, and more.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-green-100 rounded-md p-2">
+                                <i data-feather="upload" class="text-green-600"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-gray-900">1. Upload Image</p>
+                                <p class="text-sm text-gray-500">Take or upload a clear photo of a potato leaf.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-green-100 rounded-md p-2">
+                                <i data-feather="cpu" class="text-green-600"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-gray-900">2. AI Analysis</p>
+                                <p class="text-sm text-gray-500">Our model processes the image using computer vision.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex-shrink-0 bg-green-100 rounded-md p-2">
+                                <i data-feather="clipboard" class="text-green-600"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-gray-900">3. Get Results</p>
+                                <p class="text-sm text-gray-500">Receive instant diagnosis and treatment recommendations.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div data-aos="fade-left">
+                    <div class="relative">
+                        <img src="http://static.photos/agriculture/640x360/1" alt="Healthy Potato Plant" class="rounded-lg shadow-xl w-full">
+                        <div class="absolute -bottom-6 -right-6 bg-white p-4 rounded-lg shadow-lg" data-aos="zoom-in" data-aos-delay="300">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 bg-green-100 rounded-full p-2">
+                                    <i data-feather="check-circle" class="text-green-600"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium text-gray-900">Healthy Leaf</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Diseases Section -->
+    <section id="diseases" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl" data-aos="fade-up">
+                    Common Potato Diseases
+                </h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto" data-aos="fade-up" data-aos-delay="100">
+                    Our model can detect these common potato diseases with high accuracy.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Disease Card 1 -->
+                <div class="disease-card bg-white rounded-xl shadow-md overflow-hidden" data-aos="fade-up">
+                    <img class="h-48 w-full object-cover" src="http://static.photos/agriculture/640x360/2" alt="Early Blight">
+                    <div class="p-6">
+                        <div class="flex items-center mb-2">
+                            <div class="flex-shrink-0 bg-yellow-100 rounded-full p-2">
+                                <i data-feather="alert-triangle" class="text-yellow-600"></i>
+                            </div>
+                            <div class="ml-3">
+                                <h3 class="text-lg font-semibold text-gray-900">Early Blight</h3>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm">
+                            Caused by Alternaria solani, appears as small, dark lesions with concentric rings.
+                        </p>
+                        <div class="mt-4">
+                            <span class="inline-block bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full">Treatment: Fungicides</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Disease Card 2 -->
+                <div class="disease-card bg-white rounded-xl shadow-md overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+                    <img class="h-48 w-full object-cover" src="http://static.photos/agriculture/640x360/3" alt="Late Blight">
+                    <div class="p-6">
+                        <div class="flex items-center mb-2">
+                            <div class="flex-shrink-0 bg-red-100 rounded-full p-2">
+                                <i data-feather="alert-octagon" class="text-red-600"></i>
+                            </div>
+                            <div class="ml-3">
+                                <h3 class="text-lg font-semibold text-gray-900">Late Blight</h3>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm">
+                            Caused by Phytophthora infestans, appears as water-soaked lesions that turn brown.
+                        </p>
+                        <div class="mt-4">
+                            <span class="inline-block bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full">Treatment: Remove infected plants</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Disease Card 3 -->
+                <div class="disease-card bg-white rounded-xl shadow-md overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+                    <img class="h-48 w-full object-cover" src="http://static.photos/agriculture/640x360/4" alt="Blackleg">
+                    <div class="p-6">
+                        <div class="flex items-center mb-2">
+                            <div class="flex-shrink-0 bg-gray-100 rounded-full p-2">
+                                <i data-feather="alert-circle" class="text-gray-600"></i>
+                            </div>
+                            <div class="ml-3">
+                                <h3 class="text-lg font-semibold text-gray-900">Blackleg</h3>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm">
+                            Caused by bacteria, appears as black, rotting stems at the base of the plant.
+                        </p>
+                        <div class="mt-4">
+                            <span class="inline-block bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full">Treatment: Remove infected plants</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Disease Card 4 -->
+                <div class="disease-card bg-white rounded-xl shadow-md overflow-hidden" data-aos="fade-up" data-aos-delay="300">
+                    <img class="h-48 w-full object-cover" src="http://static.photos/agriculture/640x360/5" alt="Healthy">
+                    <div class="p-6">
+                        <div class="flex items-center mb-2">
+                            <div class="flex-shrink-0 bg-green-100 rounded-full p-2">
+                                <i data-feather="check-circle" class="text-green-600"></i>
+                            </div>
+                            <div class="ml-3">
+                                <h3 class="text-lg font-semibold text-gray-900">Healthy</h3>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm">
+                            Healthy potato leaves are vibrant green with no spots, lesions, or discoloration.
+                        </p>
+                        <div class="mt-4">
+                            <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">No treatment needed</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detection Section -->
+    <section id="detection" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl" data-aos="fade-up">
+                    Disease Detection
+                </h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto" data-aos="fade-up" data-aos-delay="100">
+                    Upload an image of a potato leaf to analyze for diseases.
+                </p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto">
+                <div class="upload-area rounded-lg p-8 text-center cursor-pointer mb-8" data-aos="fade-up">
+                    <div class="flex flex-col items-center justify-center">
+                        <i data-feather="upload-cloud" class="w-12 h-12 text-green-600 mb-4"></i>
+                        <h3 class="text-lg font-medium text-gray-900">Upload Potato Leaf Image</h3>
+                        <p class="mt-1 text-sm text-gray-600">Drag and drop your file here or click to browse</p>
+                        <p class="mt-2 text-xs text-gray-500">Supports: JPG, PNG (Max 5MB)</p>
+                    </div>
+                    <input type="file" class="hidden" accept="image/*">
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div data-aos="fade-right">
+                        <div class="bg-gray-50 rounded-lg p-4 h-full flex items-center justify-center">
+                            <div class="text-center">
+                                <i data-feather="image" class="w-16 h-16 text-gray-400 mx-auto"></i>
+                                <p class="mt-2 text-sm text-gray-500">Image preview will appear here</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-aos="fade-left">
+                        <div class="bg-gray-50 rounded-lg p-6 h-full">
+                            <h3 class="text-lg font-medium text-gray-900 mb-4">Analysis Results</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-gray-600">Early Blight</span>
+                                    <span class="text-sm font-medium text-gray-900">0%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-yellow-500 h-2.5 rounded-full" style="width: 0%"></div>
+                                </div>
+                                
+                                <div class="flex items-center justify-between">
+                                    <span class="text-gray-600">Late Blight</span>
+                                    <span class="text-sm font-medium text-gray-900">0%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-red-500 h-2.5 rounded-full" style="width: 0%"></div>
+                                </div>
+                                
+                                <div class="flex items-center justify-between">
+                                    <span class="text-gray-600">Blackleg</span>
+                                    <span class="text-sm font-medium text-gray-900">0%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-gray-500 h-2.5 rounded-full" style="width: 0%"></div>
+                                </div>
+                                
+                                <div class="flex items-center justify-between">
+                                    <span class="text-gray-600">Healthy</span>
+                                    <span class="text-sm font-medium text-gray-900">0%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-green-500 h-2.5 rounded-full" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            
+                            <button class="mt-6 w-full flex justify-center items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-300">
+                                <i data-feather="zap" class="mr-2"></i>
+                                Analyze Disease
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl" data-aos="fade-up">
+                    Frequently Asked Questions
+                </h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto" data-aos="fade-up" data-aos-delay="100">
+                    Find answers to common questions about our potato disease detection system.
+                </p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="bg-white shadow overflow-hidden rounded-lg" data-aos="fade-up">
+                    <button class="w-full px-6 py-4 text-left focus:outline-none">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-lg font-medium text-gray-900">How accurate is the disease detection model?</h3>
+                            <i data-feather="chevron-down" class="text-gray-500 transform transition-transform duration-300"></i>
+                        </div>
+                    </button>
+                    <div class="accordion-content px-6 pb-4">
+                        <p class="text-gray-600">
+                            Our model achieves an accuracy of over 95% in laboratory conditions. In real-world scenarios, 
+                            accuracy may vary depending on image quality and environmental factors. We continuously 
+                            improve the model with new data.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 2 -->
+                <div class="bg-white shadow overflow-hidden rounded-lg" data-aos="fade-up" data-aos-delay="100">
+                    <button class="w-full px-6 py-4 text-left focus:outline-none">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-lg font-medium text-gray-900">Which diseases can the system detect?</h3>
+                            <i data-feather="chevron-down" class="text-gray-500 transform transition-transform duration-300"></i>
+                        </div>
+                    </button>
+                    <div class="accordion-content px-6 pb-4">
+                        <p class="text-gray-600">
+                            Currently, our system can detect Early Blight, Late Blight, and Blackleg diseases in potato plants. 
+                            We're working to expand detection capabilities to include more diseases in future updates.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 3 -->
+                <div class="bg-white shadow overflow-hidden rounded-lg" data-aos="fade-up" data-aos-delay="200">
+                    <button class="w-full px-6 py-4 text-left focus:outline-none">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-lg font-medium text-gray-900">What type of images should I upload?</h3>
+                            <i data-feather="chevron-down" class="text-gray-500 transform transition-transform duration-300"></i>
+                        </div>
+                    </button>
+                    <div class="accordion-content px-6 pb-4">
+                        <p class="text-gray-600">
+                            For best results, upload clear, well-lit photos of individual potato leaves against a neutral background. 
+                            The leaf should fill most of the frame. Avoid blurry images or those with multiple leaves overlapping.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- FAQ Item 4 -->
+                <div class="bg-white shadow overflow-hidden rounded-lg" data-aos="fade-up" data-aos-delay="300">
+                    <button class="w-full px-6 py-4 text-left focus:outline-none">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-lg font-medium text-gray-900">Is my data stored when I upload an image?</h3>
+                            <i data-feather="chevron-down" class="text-gray-500 transform transition-transform duration-300"></i>
+                        </div>
+                    </button>
+                    <div class="accordion-content px-6 pb-4">
+                        <p class="text-gray-600">
+                            Images are processed in real-time and are not stored permanently unless you opt-in to help improve our model. 
+                            All data is handled according to our strict privacy policy.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-green-800 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold sm:text-4xl" data-aos="fade-up">
+                    Contact Us
+                </h2>
+                <p class="mt-4 max-w-2xl text-xl text-green-200 mx-auto" data-aos="fade-up" data-aos-delay="100">
+                    Have questions or feedback? We'd love to hear from you.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <div data-aos="fade-right">
+                    <form class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-green-100">Name</label>
+                            <input type="text" id="name" name="name" class="mt-1 block w-full border border-green-700 bg-green-900 text-white rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-green-500 focus:border-green-500">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-green-100">Email</label>
+                            <input type="email" id="email" name="email" class="mt-1 block w-full border border-green-700 bg-green-900 text-white rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-green-500 focus:border-green-500">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-green-100">Message</label>
+                            <textarea id="message" name="message" rows="4" class="mt-1 block w-full border border-green-700 bg-green-900 text-white rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-green-500 focus:border-green-500"></textarea>
+                        </div>
+                        <div>
+                            <button type="submit" class="w-full flex justify-center items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-green-800 bg-white hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-300">
+                                Send Message
+                                <i data-feather="send" class="ml-2"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div data-aos="fade-left">
+                    <div class="bg-green-700 rounded-lg p-8 h-full">
+                        <h3 class="text-lg font-medium mb-6">Other Ways to Connect</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 bg-green-600 rounded-full p-2">
+                                    <i data-feather="mail" class="text-white"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium">Email</p>
+                                    <p class="text-sm text-green-200">anshsharma74039@gmail.com
+
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 bg-green-600 rounded-full p-2">
+                                    <i data-feather="phone" class="text-white"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium">Phone</p>
+                                    <p class="text-sm text-green-200">+91 7404539782</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 bg-green-600 rounded-full p-2">
+                                    <i data-feather="map-pin" class="text-white"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium">Address</p>
+                                    <p class="text-sm text-green-200">Bennett University, Greater Noida </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-8">
+                            <h4 class="text-sm font-medium mb-4">Follow Us</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="text-green-200 hover:text-white transition duration-300">
+                                    <i data-feather="twitter"></i>
+                                </a>
+                                <a href="#" class="text-green-200 hover:text-white transition duration-300">
+                                    <i data-feather="facebook"></i>
+                                </a>
+                                <a href="#" class="text-green-200 hover:text-white transition duration-300">
+                                    <i data-feather="instagram"></i>
+                                </a>
+                                <a href="#" class="text-green-200 hover:text-white transition duration-300">
+                                    <i data-feather="linkedin"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-green-900 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex items-center mb-4 md:mb-0">
+                    <i data-feather="cpu" class="text-green-400"></i>
+                    <span class="ml-2 font-bold text-lg text-green-200">PotatoAI</span>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#home" class="text-green-300 hover:text-white transition duration-300">Home</a>
+                    <a href="#about" class="text-green-300 hover:text-white transition duration-300">About</a>
+                    <a href="#diseases" class="text-green-300 hover:text-white transition duration-300">Diseases</a>
+                    <a href="#detection" class="text-green-300 hover:text-white transition duration-300">Detection</a>
+                    <a href="#faq" class="text-green-300 hover:text-white transition duration-300">FAQ</a>
+                    <a href="#contact" class="text-green-300 hover:text-white transition duration-300">Contact</a>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-green-800 text-center text-sm text-green-400">
+                <p>© 2023 Potato Disease Detection AI. All rights reserved.</p>
+                <p class="mt-2">Built with <i data-feather="heart" class="inline w-4 h-4 text-red-400"></i> using Machine Learning</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+        
+        feather.replace();
+        
+        // Mobile menu toggle
+        document.querySelector('[aria-controls="mobile-menu"]').addEventListener('click', function() {
+            // Mobile menu implementation would go here
+            console.log('Mobile menu toggled');
+        });
+        
+        // FAQ accordion functionality
+        document.querySelectorAll('#faq button').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const icon = button.querySelector('i');
+                
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                    icon.classList.remove('rotate-180');
+                } else {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                    icon.classList.add('rotate-180');
+                }
+            });
+        });
+        
+        // File upload preview
+        const uploadArea = document.querySelector('.upload-area');
+        const fileInput = uploadArea.querySelector('input[type="file"]');
+        const previewArea = document.querySelector('#detection .bg-gray-50');
+        
+        uploadArea.addEventListener('click', () => fileInput.click());
+        
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    previewArea.innerHTML = `<img src="${event.target.result}" alt="Preview" class="rounded-lg w-full h-auto">`;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        
+        // Drag and drop functionality
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, preventDefaults, false);
+        });
+        
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        
+        ['dragenter', 'dragover'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, highlight, false);
+        });
+        
+        ['dragleave', 'drop'].forEach(eventName => {
+            uploadArea.addEventListener(eventName, unhighlight, false);
+        });
+        
+        function highlight() {
+            uploadArea.classList.add('bg-green-50');
+        }
+        
+        function unhighlight() {
+            uploadArea.classList.remove('bg-green-50');
+        }
+        
+        uploadArea.addEventListener('drop', handleDrop, false);
+        
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            fileInput.files = files;
+            const event = new Event('change');
+            fileInput.dispatchEvent(event);
+        }
+    </script>
+</body>
+</html>
